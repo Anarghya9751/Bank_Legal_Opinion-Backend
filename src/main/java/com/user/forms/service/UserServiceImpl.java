@@ -1,6 +1,7 @@
 package com.user.forms.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,9 +24,9 @@ public class UserServiceImpl implements UserService {
 	
 
 	@Override
-	public UserEntity getById(Long Id) {
+	public Optional<UserEntity> getById(Long id) {
 		// TODO Auto-generated method stub
-		return repo.findById(Id).get();
+		return repo.findById(id);
 	}
 
 	@Override
@@ -35,15 +36,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserEntity updateUser(Long Id) {
+	public UserEntity updateUser(Long id,UserEntity user) {
 		// TODO Auto-generated method stub
-		return repo.findById(Id).get()  ;
+		return repo.save(user);
 	}
 
 	@Override
-	public String deleteById(Long Id) {
+	public String deleteById(Long id) {
 		// TODO Auto-generated method stub
-		 repo.deleteById(Id);
+		 repo.deleteById(id);
 		 return "deleted sucessfully";
 	}
 

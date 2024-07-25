@@ -8,4 +8,8 @@ import com.user.forms.entity.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
+	
+
+	
+
 }

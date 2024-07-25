@@ -28,7 +28,7 @@ public class UserEntity {
    //mail 
 	@NotEmpty(message = "This field is required")
 	//@Email(message = "Invalid mail format") not working properly
-	@Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$", message = "Invalid mail format")
+	@Pattern(regexp = "^[A-Za-z0-9._%+-]+@gmail\\.(com|in)$", message = "Email must be a valid Gmail address (gmail.com or gmail.in)")
 	@Column(name = "mail",unique = true)
    private String  mail;
 	//phoneNumber
