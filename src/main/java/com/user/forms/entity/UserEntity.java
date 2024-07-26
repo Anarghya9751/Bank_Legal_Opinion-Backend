@@ -33,8 +33,10 @@ public class UserEntity {
    private String  mail;
 	//phoneNumber
 	@NotNull(message = "Phone number cannot be null")
-//	@Pattern(regexp = "^\\d{10}$", message = "Invalid phoneNumber")
+	//@Pattern(regexp = "^\\d{10}$", message = "Invalid phoneNumber")
+	 //@Pattern(regexp = "^\\d{10}$", message = "Phone number must be exactly 10 digits")
    private Long   phoneNumber;
+	 //private String phoneNumber;
 	
    private String address;
 
