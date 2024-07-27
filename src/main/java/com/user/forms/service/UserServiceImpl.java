@@ -49,4 +49,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+
+	public boolean existsByMail(String mail) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 }
