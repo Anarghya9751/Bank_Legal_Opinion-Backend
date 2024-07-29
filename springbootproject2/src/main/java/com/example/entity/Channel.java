@@ -8,17 +8,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 @Entity
 public class Channel {
 	 @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
-
+@NotBlank(message="name is mandatory")
 	    private String name;
 
 	    @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL, orphanRemoval = true)
 	    private Set<Report> reports;
-
+	    @NotNull(message="revenuegenerated must be not null")
 	    private Double revenueGenerated;
 
 		public Long getId() {
