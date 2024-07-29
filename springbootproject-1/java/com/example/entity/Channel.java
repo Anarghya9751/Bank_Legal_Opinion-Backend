@@ -2,6 +2,7 @@ package com.example.entity;
 
 import java.util.Set;
 
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name="channel")
 public class Channel {
@@ -18,12 +21,16 @@ public class Channel {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 
+	 @NotBlank(message="Name is Mandatory")
 	    private String name;
 
 	    @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL, orphanRemoval = true)
 	    private Set<Report> reports;
-
+	    
+	    
+	    @NotNull(message = "Revenue generated cannot be null")
 	    private Double revenueGenerated;
+	   
 
 		public Long getId() {
 			return id;

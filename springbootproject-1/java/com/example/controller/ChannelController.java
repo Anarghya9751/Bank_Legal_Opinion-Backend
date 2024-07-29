@@ -9,15 +9,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.Channel;
 import com.example.service.ChannelService;
+
+
+@RestController
+@RequestMapping("/api/channel")
 
 public class ChannelController {
 	  @Autowired
 	    private ChannelService channelService;
 
-	    @GetMapping
+	    @GetMapping("/getall")
 	    public List<Channel> getAllChannels() {
 	        return channelService.getAllChannels();
 	    }
@@ -28,16 +34,16 @@ public class ChannelController {
 	;
 	    }
 
-	    @PostMapping
-	    public Channel createChannel(@RequestBody Channel channel) {
-	        return channelService.saveChannel(channel);
+	    @PostMapping("/create")
+	    public Channel createchannel(@RequestBody Channel channel) {
+	        return channelService.createChannel(channel);
 	    }
 
 	    @PutMapping("/{id}")
 	    public Channel updateChannel(@PathVariable Long id, @RequestBody Channel channel) {
 	        channel.setId(id)
 	;
-	        return channelService.saveChannel(channel);
+	        return channelService.createChannel(channel);
 	    }
 
 	    @DeleteMapping("/{id}")
