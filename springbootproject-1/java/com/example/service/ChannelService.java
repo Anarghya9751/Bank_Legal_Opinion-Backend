@@ -30,17 +30,26 @@ public class ChannelService {
 	        }
 	        return channel.get();
 	    }
+	    
+	    
+	    
 	    public Channel createChannel(Channel channel) {
-	        if (channel.getName() == null || channel.getName().isEmpty()) {
+	       
+	    	
+	    	if (channel.getName() == null || channel.getName().isEmpty()) {
 	            throw new InvalidChannelException("Channel name cannot be null or empty.");
 	        }
 	       
 	        return channelRepository.save(channel);
-	    }
+	        }
 
 
 	   
 	    public void deleteChannel(Long id) {
+	        //channelRepository.deleteById(id);
+	    	if (!channelRepository.existsById(id)) {
+	            throw new InvalidChannelException("Channel not found with id: " + id);
+	        }
 	        channelRepository.deleteById(id);
 	    }
 	}

@@ -4,6 +4,7 @@ public enum ReportStatus {
 	IN_PROCESS,
     PENDING,
     ON_HOLD,
-    COMPLETED
+    COMPLETED;
 
+	
 }
