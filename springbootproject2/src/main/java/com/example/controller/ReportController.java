@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.entity.Report;
 import com.example.service.ReportService;
 @RestController
-@RequestMapping("/reports")
+@RequestMapping("/api/reports")
 public class ReportController {
 	 @Autowired
 	    private ReportService reportService;
@@ -30,7 +30,7 @@ public class ReportController {
 	        return reportService.getReportById(id);
 	    }
 
-	    @PostMapping
+	    @PostMapping("/create")
 	    public Report createReport(@RequestBody Report report) {
 	        return reportService.saveReport(report);
 	    }
