@@ -26,7 +26,7 @@ public class ChannelService {
 	    public Channel getChannelById(Long id) {
 	        Optional<Channel> channel = channelRepository.findById(id);
 	        if (channel.isEmpty()) {
-	            throw new ChannelNotFoundException("Channel with ID " + id + " not found.");
+	            throw new InvalidChannelException("Channel with ID " + id + " not found.");
 	        }
 	        return channel.get();
 	    }
@@ -37,7 +37,7 @@ public class ChannelService {
 	       
 	    	
 	    	if (channel.getName() == null || channel.getName().isEmpty()) {
-	            throw new InvalidChannelException("Channel name cannot be null or empty.");
+	            throw new ChannelNotFoundException("Channel name cannot be null or empty.");
 	        }
 	       
 	        return channelRepository.save(channel);
@@ -48,7 +48,7 @@ public class ChannelService {
 	    public void deleteChannel(Long id) {
 	        //channelRepository.deleteById(id);
 	    	if (!channelRepository.existsById(id)) {
-	            throw new InvalidChannelException("Channel not found with id: " + id);
+	            throw new ChannelNotFoundException("Channel not found with id: " + id);
 	        }
 	        channelRepository.deleteById(id);
 	    }

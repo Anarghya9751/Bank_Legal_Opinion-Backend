@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name="report")
 public class Report {
@@ -62,13 +63,16 @@ public class Report {
 	    private Long id;
 
 	    @Enumerated(EnumType.STRING)
+	    @NotNull(message ="type is mandatory")
 	    private ReportType type;
 
 	    @Enumerated(EnumType.STRING)
-	    private ReportStatus status;
-
-	    @ManyToOne
-	    @JoinColumn(name = "channel_id")
+	    @NotNull(message ="status is mandatory")
+	    private ReportStatus status;	 
+	   
+	    
+	    @JoinColumn(name = "channel_id", nullable=false)
+	   @ManyToOne
 	    private Channel channel;
 
 
