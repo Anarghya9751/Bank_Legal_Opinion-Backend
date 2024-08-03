@@ -1,0 +1,77 @@
+package com.anarghya.price.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.anarghya.price.entity.PricingEntity;
+import com.anarghya.price.exception.IdNotFoundException;
+import com.anarghya.price.repository.PricingRepository;
+
+import jakarta.transaction.Transactional;
+
+@Service
+public class PricingServiceImp implements PricingService {
+
+    @Autowired
+    private PricingRepository pricingRepo;
+    
+
+    @Transactional
+    public PricingEntity savePrice(PricingEntity price) {
+        return pricingRepo.save(price);
+    }
+
+
+	@Override
+	 public Long calculateTotalPrice(Integer priceId) {
+        PricingEntity pricingEntity = pricingRepo.findById(priceId)
+                .orElseThrow(() -> new RuntimeException("Pricing not found for this id :: " + priceId));
+        
+        return calculateTotal(pricingEntity);
+    }
+
+    private Long calculateTotal(PricingEntity pricingEntity) {
+        return (pricingEntity.getOpinionFee() != null ? pricingEntity.getOpinionFee() : 0) +
+               (pricingEntity.getCaseFee() != null ? pricingEntity.getCaseFee() : 0) +
+               (pricingEntity.getNoticeFee() != null ? pricingEntity.getNoticeFee() : 0) +
+               (pricingEntity.getGst() != null ? pricingEntity.getGst() : 0);
+    }
+
+    
+   
+//    @Override
+//    public List<PricingEntity> getAll() {
+//        return pricingRepo.findAll();
+//    }
+//
+//    @Override
+//    public PricingEntity updatePrice(Integer priceId, PricingEntity price) {
+//        PricingEntity existingPrice = pricingRepo.findById(priceId)
+//                .orElseThrow(() -> new IdNotFoundException("PricingEntity not found with id: " + priceId));
+//
+//        // Update fields
+//        existingPrice.setPriceId(price.getPriceId());  // Assuming priceId can be updated
+//        // Update other fields as necessary
+//
+//        return pricingRepo.save(existingPrice);
+//    }
+
+//    @Override
+//    public PricingEntity getById(Integer priceId) {
+//        return pricingRepo.findById(priceId)
+//                .orElseThrow(() -> new IdNotFoundException("PricingEntity not found with id: " + priceId));
+//    }
+//
+//	@Override
+//	public String deletePricing(Integer priceId) {
+//		if (pricingRepo.existsById(priceId)) {
+//			pricingRepo.deleteById(priceId);
+//			return "Deleted Successfully";
+//		}
+//		return "No User Found";
+//		// TODO Auto-generated method stub
+//		
+//	}
+}
