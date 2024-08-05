@@ -1,4 +1,4 @@
-package com.source.service;
+ package com.source.service;
 
 
 import java.util.List;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.source.repo.BankRepository;
 import com.source.entity.BankEntity;
+import com.source.exception.IdNotFoundException;
 
 @Service
 public class BankServiceImpl implements BankService {
@@ -31,7 +32,7 @@ public class BankServiceImpl implements BankService {
 	
 	@Override
     public BankEntity getBankById(Long id) {
-        return repo.findById(id).get();
+        return repo.findById(id).orElseThrow(()->new IdNotFoundException("bank with is id  not"));
     }
     
 	@Override
@@ -48,3 +49,4 @@ public class BankServiceImpl implements BankService {
 	}
 
 }
+
