@@ -25,18 +25,21 @@ public class PricingServiceImp implements PricingService {
 
 
 	@Override
-	 public Long calculateTotalPrice(Integer priceId) {
+	 public Double calculateTotalPrice(Integer priceId) {
         PricingEntity pricingEntity = pricingRepo.findById(priceId)
                 .orElseThrow(() -> new RuntimeException("Pricing not found for this id :: " + priceId));
         
         return calculateTotal(pricingEntity);
     }
 
-    private Long calculateTotal(PricingEntity pricingEntity) {
-        return (pricingEntity.getOpinionFee() != null ? pricingEntity.getOpinionFee() : 0) +
+    private Double calculateTotal(PricingEntity pricingEntity) {
+        Double total= (pricingEntity.getOpinionFee() != null ? pricingEntity.getOpinionFee() : 0) +
                (pricingEntity.getCaseFee() != null ? pricingEntity.getCaseFee() : 0) +
-               (pricingEntity.getNoticeFee() != null ? pricingEntity.getNoticeFee() : 0) +
-               (pricingEntity.getGst() != null ? pricingEntity.getGst() : 0);
+               (pricingEntity.getNoticeFee() != null ? pricingEntity.getNoticeFee() : 0);
+        
+        Double gst = total * (pricingEntity.getGst() != null ? pricingEntity.getGst(): 0) /100;
+        
+        return total+gst;
     }
 
     

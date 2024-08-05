@@ -10,7 +10,7 @@ public interface PricingService {
 
 	public PricingEntity savePrice(PricingEntity price);
 	
-	public Long calculateTotalPrice(Integer priceId);
+	public Double calculateTotalPrice(Integer priceId);
 
 //	public PricingEntity updatePrice(Integer priceId, PricingEntity price);
 //

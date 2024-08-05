@@ -16,63 +16,88 @@ public class PricingEntity {
 	private Integer priceId;
 
 	@Column(name = "opinion_Fee")
-	private Long opinionFee;
+	@NotNull(message = "caseFee cannot be empty ")
+	private Double opinionFee;
 
 	@Column(name = "case_fee")
 	@NotNull(message = "caseFee cannot be empty ")
-	private Long caseFee;
+	private Double caseFee;
 
 	@Column(name = "notice_fee")
 	@NotNull(message = "noticeFee cannot be empty")
-	private Long noticeFee;
+	private Double noticeFee;
 	
 	@Column(name="gst")
-	@DecimalMax(value = "8.0", inclusive = true)
-	private Long gst;
+	@DecimalMax(value = "10.0", inclusive = true)
+	@NotNull(message = "GST cannot be empty")
+	private Double gst;
+
+	
 
 	public Integer getPriceId() {
 		return priceId;
 	}
 
+
+
 	public void setPriceId(Integer priceId) {
 		this.priceId = priceId;
 	}
 
-	public Long getOpinionFee() {
+
+
+	public Double getOpinionFee() {
 		return opinionFee;
 	}
 
-	public void setOpinionFee(Long opinionFee) {
+
+
+	public void setOpinionFee(Double opinionFee) {
 		this.opinionFee = opinionFee;
 	}
 
-	public Long getCaseFee() {
+
+
+	public Double getCaseFee() {
 		return caseFee;
 	}
 
-	public void setCaseFee(Long caseFee) {
+
+
+	public void setCaseFee(Double caseFee) {
 		this.caseFee = caseFee;
 	}
 
-	public Long getNoticeFee() {
+
+
+	public Double getNoticeFee() {
 		return noticeFee;
 	}
 
-	public void setNoticeFee(Long noticeFee) {
+
+
+	public void setNoticeFee(Double noticeFee) {
 		this.noticeFee = noticeFee;
 	}
 
-	public Long getGst() {
+
+
+	public Double getGst() {
 		return gst;
 	}
 
-	public void setGst(Long gst) {
+
+
+	public void setGst(Double gst) {
 		this.gst = gst;
 	}
 
-	public PricingEntity(Integer priceId, Long opinionFee, @NotNull(message = "caseFee cannot be empty ") Long caseFee,
-			@NotNull(message = "noticeFee cannot be empty") Long noticeFee,
-			@DecimalMax(value = "8.0", inclusive = true) Long gst) {
+
+
+	public PricingEntity(Integer priceId, @NotNull(message = "caseFee cannot be empty ") Double opinionFee,
+			@NotNull(message = "caseFee cannot be empty ") Double caseFee,
+			@NotNull(message = "noticeFee cannot be empty") Double noticeFee,
+			@DecimalMax(value = "8.0", inclusive = true) Double gst) {
 		super();
 		this.priceId = priceId;
 		this.opinionFee = opinionFee;
@@ -80,6 +105,8 @@ public class PricingEntity {
 		this.noticeFee = noticeFee;
 		this.gst = gst;
 	}
+
+
 
 	public PricingEntity() {
 		super();

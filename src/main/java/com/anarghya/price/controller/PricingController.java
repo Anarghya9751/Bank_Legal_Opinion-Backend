@@ -30,8 +30,8 @@ public class PricingController {
 	}
 	
 	@GetMapping("/{priceId}/total")
-    public Long getTotalPrice(@PathVariable Integer priceId) {
-        return pricingService.calculateTotalPrice(priceId);
+    public String getTotalPrice(@PathVariable Integer priceId) {
+        return "Total Fee : "+ pricingService.calculateTotalPrice(priceId);
     }
 	
 //	 @GetMapping("/get/{priceId}")
