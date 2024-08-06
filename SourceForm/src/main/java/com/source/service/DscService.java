@@ -6,6 +6,7 @@ import com.source.entity.DscEntity;
 
 public interface DscService {
 	
+
 	public DscEntity saveDsc(DscEntity dsc);
     public List<DscEntity>getAll();
     public DscEntity getDscById(Long id);

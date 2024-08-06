@@ -17,18 +17,8 @@ public class DscServiceImpl implements DscService {
 	private DscRepository repo;
 	
 	@Override
-	//@Transactional
    public DscEntity saveDsc(DscEntity dscRecord) {
-     //   boolean exists = repo.existsByEmailAndContactNumber(
-       //         dscRecord.getEmail(),
-         //       dscRecord.getContactNumber()
-        //);
-
-       // if (exists) {
-       //     throw new DuplicateDscRecordException("A record with the same contact number and email details already exists.");
-     //   }
-
-        return repo.save(dscRecord);
+      return repo.save(dscRecord);
     }
 
 	@Override
@@ -42,11 +32,24 @@ public class DscServiceImpl implements DscService {
 		return repo.findById(id).orElseThrow(()->new IdNotFoundException("dsc with is  id  not"));
 	}
 
-	@Override
-	public DscEntity updateDsc(DscEntity dsc, Long id) {
-	 return repo.save(dsc);
-	}
 
+
+	@Override
+    public DscEntity updateDsc(DscEntity dsc, Long id) {
+        DscEntity existingDsc = repo.findById(id).orElseThrow(() -> new IdNotFoundException("DSC with id " + id + " not found"));
+        existingDsc.setNameofthedsc(dsc.getNameofthedsc());
+        existingDsc.setState(dsc.getState());
+        existingDsc.setCity(dsc.getCity());
+        existingDsc.setArea(dsc.getArea());
+        existingDsc.setAuthorizedPersonName(dsc.getAuthorizedPersonName());
+        existingDsc.setEmail(dsc.getEmail());
+        existingDsc.setContactNumber(dsc.getContactNumber());
+        existingDsc.setDate(dsc.getDate());
+        return repo.save(existingDsc);
+    }
+	
+	
+	
 	@Override
 	public String deleteDsc(Long id) {
 		repo.deleteById(id);

@@ -18,11 +18,11 @@ public class BankServiceImpl implements BankService {
 	@Autowired
 	private BankRepository repo;
 
-	
-	
+		
 	@Override
 	public BankEntity saveBank(BankEntity bank) {
-		return repo.save(bank);
+	return	repo.save(bank);
+	
 	}
 
 	@Override
@@ -37,8 +37,19 @@ public class BankServiceImpl implements BankService {
     
 	@Override
 	public BankEntity updateBank(BankEntity bank, Long id) {
-		return repo.save(bank);
+	    BankEntity existingBank = repo.findById(id).orElseThrow(() -> new IdNotFoundException("Bank with id " + id + " not found"));
+	    existingBank.setBankName(bank.getBankName());
+	    existingBank.setState(bank.getState());
+	    existingBank.setCity(bank.getCity());
+	    existingBank.setBranchName(bank.getBranchName());
+	    existingBank.setBranchId(bank.getBranchId());
+	    existingBank.setBranchManagerName(bank.getBranchManagerName());
+	    existingBank.setMailid(bank.getMailid());
+	    existingBank.setContactNumber(bank.getContactNumber());
+	    existingBank.setDate(bank.getDate());
+	    return repo.save(existingBank);
 	}
+
 
 	@Override
 	public String deleteBank(Long id) {
