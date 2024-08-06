@@ -12,12 +12,12 @@ public interface PricingService {
 	
 	public Double calculateTotalPrice(Integer priceId);
 
-//	public PricingEntity updatePrice(Integer priceId, PricingEntity price);
-//
-//	public PricingEntity getById(Integer priceId);
-//
-//	public List<PricingEntity> getAll();
-//	
-//	public String deletePricing(Integer priceId);
+	public PricingEntity updatePrice(Integer priceId, PricingEntity price);
+
+	public PricingEntity getById(Integer priceId);
+
+	public List<PricingEntity> getAll();
+	
+	public String deletePricing(Integer priceId);
 
 }

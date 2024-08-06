@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,21 +35,30 @@ public class PricingController {
         return "Total Fee : "+ pricingService.calculateTotalPrice(priceId);
     }
 	
-//	 @GetMapping("/get/{priceId}")
-//	    public ResponseEntity<ApiResponse<PricingEntity>> getPriceById(@PathVariable Integer priceId) {
-//	        PricingEntity price = pricingService.getById(priceId);
-//	        return ResponseEntity.ok(new ApiResponse<>("Price retrieved successfully", price));
-//	    }
-//	 @GetMapping("/allprice")
-//		public ResponseEntity<ApiResponse<List<PricingEntity>>> getAllPricing() {
-//			List<PricingEntity> prices = pricingService.getAll();
-//			return ResponseEntity.ok(new ApiResponse<>("All Price retrieved successfully", prices));
-//		}
-//		
-//		 @DeleteMapping("/delete/{priceid}")
-//			public ResponseEntity<ApiResponse<String>> deletePricing(@PathVariable Integer priceId) {
-//				String status = pricingService.deletePricing(priceId);
-//				return ResponseEntity.ok(new ApiResponse<>(status, null));
-//			}
+	 @GetMapping("/get/{priceId}")
+	    public ResponseEntity<ApiResponse<PricingEntity>> getPriceById(@PathVariable Integer priceId) {
+	        PricingEntity price = pricingService.getById(priceId);
+	        return ResponseEntity.ok(new ApiResponse<>("Price retrieved successfully", price));
+	    }
+	 @GetMapping("/allprice")
+		public ResponseEntity<ApiResponse<List<PricingEntity>>> getAllPricing() { 
+		 
+		 
+		 
+			List<PricingEntity> prices = pricingService.getAll();
+			return ResponseEntity.ok(new ApiResponse<>("All Price retrieved successfully", prices));
+		}
+		
+	 @PutMapping("/update/{priceId}")
+	    public ResponseEntity<ApiResponse<PricingEntity>> updateById(@PathVariable Integer priceId,@RequestBody PricingEntity price) {
+	        PricingEntity prices = pricingService.updatePrice(priceId, price);
+	        return ResponseEntity.ok(new ApiResponse<>("Price Updated successfully", prices));
+	    }
+	 
+		 @DeleteMapping("/delete/{priceId}")
+			public ResponseEntity<ApiResponse<String>> deletePricing(@PathVariable Integer priceId) {
+				String status = pricingService.deletePricing(priceId);
+				return ResponseEntity.ok(new ApiResponse<>(status, null));
+			}
 
 }

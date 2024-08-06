@@ -44,37 +44,39 @@ public class PricingServiceImp implements PricingService {
 
     
    
-//    @Override
-//    public List<PricingEntity> getAll() {
-//        return pricingRepo.findAll();
-//    }
-//
-//    @Override
-//    public PricingEntity updatePrice(Integer priceId, PricingEntity price) {
-//        PricingEntity existingPrice = pricingRepo.findById(priceId)
-//                .orElseThrow(() -> new IdNotFoundException("PricingEntity not found with id: " + priceId));
-//
-//        // Update fields
-//        existingPrice.setPriceId(price.getPriceId());  // Assuming priceId can be updated
-//        // Update other fields as necessary
-//
-//        return pricingRepo.save(existingPrice);
-//    }
+    @Override
+    public List<PricingEntity> getAll() {
+        return pricingRepo.findAll();
+    }
 
-//    @Override
-//    public PricingEntity getById(Integer priceId) {
-//        return pricingRepo.findById(priceId)
-//                .orElseThrow(() -> new IdNotFoundException("PricingEntity not found with id: " + priceId));
-//    }
-//
-//	@Override
-//	public String deletePricing(Integer priceId) {
-//		if (pricingRepo.existsById(priceId)) {
-//			pricingRepo.deleteById(priceId);
-//			return "Deleted Successfully";
-//		}
-//		return "No User Found";
-//		// TODO Auto-generated method stub
-//		
-//	}
+    @Override
+    public PricingEntity updatePrice(Integer priceId, PricingEntity price) {
+        PricingEntity existingPrice = pricingRepo.findById(priceId)
+                .orElseThrow(() -> new IdNotFoundException("PricingEntity not found with id: " + priceId));
+
+//        existingPrice.setPriceId(price.getPriceId());  
+        existingPrice.setCaseFee(price.getCaseFee());
+        existingPrice.setGst(price.getGst());
+        existingPrice.setNoticeFee(price.getNoticeFee());
+        existingPrice.setOpinionFee(price.getOpinionFee());
+
+        return pricingRepo.save(existingPrice);
+    }
+
+    @Override
+    public PricingEntity getById(Integer priceId) {
+        return pricingRepo.findById(priceId)
+                .orElseThrow(() -> new IdNotFoundException("PricingEntity not found with id: " + priceId));
+    }
+
+	@Override
+	public String deletePricing(Integer priceId) {
+		if (pricingRepo.existsById(priceId)) {
+			pricingRepo.deleteById(priceId);
+			return "Deleted Successfully";
+		}
+		return "No User Found";
+		// TODO Auto-generated method stub
+		
+	}
 }
