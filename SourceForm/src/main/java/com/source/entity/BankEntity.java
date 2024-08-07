@@ -1,19 +1,21 @@
 package com.source.entity;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "Bank")
@@ -38,8 +40,8 @@ public class BankEntity {
    @Pattern(regexp ="^[a-zA-z]+$",message = "branchName must contain alphabets only")
     private String branchName;
 
-    @NotEmpty(message = "branchId is required")
-    private String branchId;
+//    @NotEmpty(message = "branchId is required")
+//    private String branchId;
 
     @NotEmpty(message = "branchmanagername is required")
     @Pattern(regexp ="^[a-zA-z]+$",message = "branchManagerName must contain alphabets only")
@@ -56,6 +58,10 @@ public class BankEntity {
     
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MMM-yyyy")
     private Date date;
+    
+    @ManyToOne
+	@JoinColumn(name = "branch_id")
+	private BranchEntity branch;
 
 	public Long getId() {
 		return id;
@@ -97,13 +103,13 @@ public class BankEntity {
 		this.branchName = branchName;
 	}
 
-	public String getBranchId() {
-		return branchId;
-	}
-
-	public void setBranchId(String branchId) {
-		this.branchId = branchId;
-	}
+//	public String getBranchId() {
+//		return branchId;
+//	}
+//
+//	public void setBranchId(String branchId) {
+//		this.branchId = branchId;
+//	}
 
 	public String getBranchManagerName() {
 		return branchManagerName;
@@ -137,19 +143,39 @@ public class BankEntity {
 		this.date = date;
 	}
 
-	public BankEntity(Long id, String bankName, String state, String city, String branchName, String branchId,
-			String branchManagerName, String mailid, String contactNumber, Date date) {
+	
+
+	public BranchEntity getBranch() {
+		return branch;
+	}
+
+	public void setBranch(BranchEntity branch) {
+		this.branch = branch;
+	}
+	
+	
+
+	
+	public BankEntity(Long id,
+			@NotEmpty(message = "bankName is required") @Pattern(regexp = "^[a-zA-z]+$", message = "bankName must contain alphabets only") String bankName,
+			@NotEmpty(message = "state is required") @Pattern(regexp = "^[a-zA-z]+$", message = "state must contain alphabets only") String state,
+			@NotEmpty(message = "city is required") @Pattern(regexp = "^[a-zA-z]+$", message = "city must contain alphabets only") String city,
+			@NotEmpty(message = "branchName is required") @Pattern(regexp = "^[a-zA-z]+$", message = "branchName must contain alphabets only") String branchName,
+			@NotEmpty(message = "branchmanagername is required") @Pattern(regexp = "^[a-zA-z]+$", message = "branchManagerName must contain alphabets only") String branchManagerName,
+			@Email(message = "Invalid email format") @Pattern(regexp = "^[A-Za-z0-9._%+-]+@gmail\\.(com|in)$", message = "email must be a valid Gmail address (gmail.com or gmail.in)") String mailid,
+			@NotNull(message = "Phone number cannot be null") @Pattern(regexp = "\\d{10}", message = "Contact number must be 10 digits only") String contactNumber,
+			Date date, BranchEntity branch) {
 		super();
 		this.id = id;
 		this.bankName = bankName;
 		this.state = state;
 		this.city = city;
 		this.branchName = branchName;
-		this.branchId = branchId;
 		this.branchManagerName = branchManagerName;
 		this.mailid = mailid;
 		this.contactNumber = contactNumber;
 		this.date = date;
+		this.branch = branch;
 	}
 
 	public BankEntity() {

@@ -38,9 +38,7 @@ public class DscController {
 		return ResponseEntity.ok(new ApiResponse<>("Dscs Data  Saved sucessfull",dscs));
 	}
     
-    
-
-    
+     
     
     @GetMapping("/getAll")
    	public ResponseEntity<ApiResponse<List<DscEntity>>> getAll(@Valid @RequestBody DscEntity dsc) {
